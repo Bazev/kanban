@@ -28,4 +28,9 @@ public class TypeTacheServiceImpl implements TypeTacheService {
 		return typeTacheDao.save(new TypeTache(nom, couleur));
 	}
 
+	@Override
+	public TypeTache recupererTypeTache(String type) {
+		return typeTacheDao.findByNom(type);
+	}
+
 }

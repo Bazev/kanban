@@ -8,5 +8,7 @@ public interface TypeTacheService {
 
 	TypeTache ajouterTypeTache(String string, String string2);
 
+	TypeTache recupererTypeTache(String type);
+
 	List<TypeTache> recupererTypesTache();
 }

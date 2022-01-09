@@ -6,4 +6,5 @@ import fr.humanbooster.fx.kanban.business.Colonne;
 
 public interface ColonneDao extends JpaRepository<Colonne, Long> {
 
+    Colonne findByNom(String nom);
 }

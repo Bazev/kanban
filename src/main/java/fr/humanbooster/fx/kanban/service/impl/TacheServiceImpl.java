@@ -1,9 +1,11 @@
 package fr.humanbooster.fx.kanban.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+import fr.humanbooster.fx.kanban.business.Colonne;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -54,6 +56,11 @@ public class TacheServiceImpl implements TacheService {
 	}
 
 	@Override
+	public Tache ajouterTache(Tache tache) {
+		return tacheDao.save(tache);
+	}
+
+	@Override
 	@Transactional(readOnly = true)
 	public List<Tache> recupererTaches() {
 
@@ -75,6 +82,16 @@ public class TacheServiceImpl implements TacheService {
 	}
 
 	@Override
+	public boolean supprimerTache(Long id) {
+		if(recupererTache(id) !=null){
+			tacheDao.deleteById(id);
+			return recupererTache(id) ==null;
+		}else{
+			return false;
+		}
+	}
+
+	@Override
 	public Tache enregistrerTache(Tache tache) {
 		return tacheDao.save(tache);
 	}
@@ -83,5 +100,38 @@ public class TacheServiceImpl implements TacheService {
 	public Page<Tache> recupererTaches(Pageable pageable) {
 		return tacheDao.findAll(pageable);
 	}
+
+	@Override
+	public Tache majTache(Tache tache, String description) {
+		tache.setIntitule(description);
+		return tacheDao.save(tache);
+	}
+
+	@Override
+	public Page<Tache> recupererTaches(Colonne colonne, Pageable pageable) {
+		return tacheDao.findAllByColonne(colonne,pageable);
+	}
+
+	@Override
+	public List<Tache> recupererTachesAFaire(Developpeur developpeur) {
+		return tacheDao.findAllTachesAFaire(developpeur);
+	}
+
+	@Override
+	public List<Tache> recupererTaches(String intitule) {
+		return tacheDao.findAllByIntituleContains(intitule);
+	}
+
+	@Override
+	public int recupererTotalHeuresPrevues(Date dateDebut, Date dateFin) {
+		return tacheDao.findTotalHeuresPrevues(dateDebut,dateFin);
+	}
+
+	@Override
+	public Tache deplacerTache(Tache tache, Colonne colonne) {
+		tache.setColonne(colonne);
+		return tacheDao.save(tache);
+	}
+
 
 }

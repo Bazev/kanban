@@ -15,4 +15,10 @@ public interface ColonneService {
 	Colonne ajouterColonne(String nom);
 
 	List<Colonne> recupererColonnes();
+
+	Colonne recupererColonne(String nom);
+
+	Colonne recupererColonne(Long id);
+
+	boolean supprimerTaches(Colonne colonne);
 }

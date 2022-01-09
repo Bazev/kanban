@@ -40,4 +40,9 @@ public class DeveloppeurServiceImpl implements DeveloppeurService {
 		return developpeurDao.findAll();
 	}
 
+	@Override
+	public Developpeur recupererDeveloppeur(Long id) {
+		return developpeurDao.findById(id).orElse(null);
+	}
+
 }

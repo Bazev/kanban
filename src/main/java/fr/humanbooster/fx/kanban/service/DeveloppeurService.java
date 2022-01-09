@@ -12,4 +12,6 @@ public interface DeveloppeurService {
 
 	List<Developpeur> recupererDeveloppeurs();
 
+	Developpeur recupererDeveloppeur(Long id);
+
 }
